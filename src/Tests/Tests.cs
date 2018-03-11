@@ -37,7 +37,7 @@
         }
 
         [Fact]
-        public void Does_Not_Report_Call_With_ConfigureAwaitFalse()
+        public void Does_Not_Report_Await_With_ConfigureAwaitFalse()
         {
             InvalidAwaitsForStatement(
                     "await MethodAsync().ConfigureAwait(false);"
@@ -46,7 +46,7 @@
         }
 
         [Fact]
-        public void Reports_Invalid_Tasks_With_No_Return_Type()
+        public void Reports_Await_On_Task_With_No_ConfigureAwait()
         {
             InvalidAwaitsForStatement(
                     "await MethodAsync();"
