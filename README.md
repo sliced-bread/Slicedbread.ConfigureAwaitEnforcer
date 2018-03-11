@@ -31,7 +31,7 @@ Found 3 new await call(s) without ConfigureAwait
 # Parameters
 
 #### Strict Mode
-```
+```bash
 > Slicedbread.ConfigureAwaitEnforcer.exe  MySolution.sln  -strict
 ```
 
@@ -41,7 +41,7 @@ Useful if you wish to find all existing invalid `await`s in your codebase locall
 
 
 #### Ignoring Files
-```
+```bash
 > Slicedbread.ConfigureAwaitEnforcer.exe  MySolution.sln  /excludeFiles "tests"  /excludeFiles "fixture" 
 ```
 
