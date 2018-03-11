@@ -36,7 +36,7 @@ Found 3 new await call(s) without ConfigureAwait
 > Slicedbread.ConfigureAwaitEnforcer.exe  MySolution.sln  -strict
 ```
 
-_All_ `await` calls without `ConfigureAwait()` will cause a failure, regardless of whether they were present in the codebase on the first run.
+_All_ `await` calls without `ConfigureAwait()` will cause a failure and be written to the console, regardless of whether they were present in the codebase on the first run.
 
 Useful if you wish to find all existing invalid `await`s in your codebase locally.
 
