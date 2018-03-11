@@ -129,7 +129,7 @@
         }
 
         [Fact]
-        public void Reports_When_Task_Run_DOes_Not_Use_ConfigureAwait()
+        public void Reports_When_Task_Run_Does_Not_Use_ConfigureAwait()
         {
             InvalidAwaitsForStatement(
                     @"await Task.Run(

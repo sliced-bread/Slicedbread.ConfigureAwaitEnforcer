@@ -14,6 +14,7 @@
         public async Task<List<InvalidCall>> GetInvalidAwaitsForSolution(string solutionPath, IEnumerable<string> excludeFilesContaining)
         {
             ConsoleWriter.WriteLine($"Loading solution {solutionPath}");
+            ConsoleWriter.WriteLine();
             var solution = await GetSolutionByPathAsync(solutionPath);
 
             ConsoleWriter.WriteLine("Analysing:");
