@@ -6,7 +6,7 @@ A command line tool for ensuring `ConfigureAwait()` is specified for all `await`
 - Supports `dynamic` - Enforces that when `await` is called on something `dynamic`, `ConfigureAwait()` must still be present
 - Integrates with CI pipelines - Uses a non-zero exit code when new invalid `await` is found, allowing you to fail the build
 
-```
+```bash
 > Slicedbread.ConfigureAwaitEnforcer.exe   MySolution.sln
 ```
 
