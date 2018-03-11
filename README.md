@@ -2,7 +2,7 @@
 
 A command line tool for ensuring `ConfigureAwait()` is specified for all `await` calls in a solution. Ideal for running in a CI pipeline.
 
-- Run on existing codebases - existing `await`s without `ConfigureAwait()` will get a free pass on the first run of the tool. Only new/modified code on subsequent will flag an error, allowing you to add this now and fix existing code later
+- Run on existing codebases - existing `await`s without `ConfigureAwait()` will get a free pass on the first run of the tool. Only new/modified code on subsequent runs will flag an error, allowing you to add this to your pipeline now and fix existing code later
 - Supports `dynamic` - Enforces that when `await` is called on something `dynamic`, `ConfigureAwait()` must still be present
 - Quickly fix invalid `await`s - Prints the project name, file name, line number and code for each invalid `await`
 - Integrates with CI pipelines - Uses a non-zero exit code when new invalid `await` is found, allowing you to fail the build
