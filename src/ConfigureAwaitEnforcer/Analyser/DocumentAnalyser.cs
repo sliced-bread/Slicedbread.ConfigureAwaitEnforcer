@@ -31,14 +31,12 @@
                 {
                     // We can't rely on the type any more, so check the syntax tree
                     //  to see if the code tries to access the ConfigureAwait member on the Task
-                    var memberAccessExpression = awaitExpression
+                    var memberAccessExpressions = awaitExpression
                         .Expression
                         .DescendantNodes()
-                        .OfType<MemberAccessExpressionSyntax>()
-                        .FirstOrDefault();
+                        .OfType<MemberAccessExpressionSyntax>();
 
-                    if (memberAccessExpression != null &&
-                        memberAccessExpression.Name.Identifier.Text == "ConfigureAwait")
+                    if (memberAccessExpressions.Any(e => e.Name.Identifier.Text == "ConfigureAwait"))
                         continue;
                 }
 
@@ -49,7 +47,12 @@
                 if (list.Any(x => x.LineNumber == line.LineNumber + 1))
                     continue;
 
-                list.Add(new InvalidCall(document.Project.Name, document.Name, line.ToString().Trim(), line.LineNumber + 1));
+                list.Add(new InvalidCall(
+                    document.Project.Name,
+                    document.Name,
+                    line.ToString().Trim(),
+                    line.LineNumber + 1)
+                );
             }
 
             return list;
