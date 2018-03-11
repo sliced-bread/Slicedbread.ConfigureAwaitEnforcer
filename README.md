@@ -2,9 +2,9 @@
 
 A command line tool for ensuring `ConfigureAwait()` is specified for all `await` calls in a solution. Ideal for running in a CI pipeline.
 
-- Run on existing codebases - `await`s without `ConfigureAwait()` will get a free pass on the first run on the tool. Only new/modified code will flag an error, allowing you to add this now and fix existing code later.
-- Supports `dynamic` - Enforces that when `await` is called on a a `dynamic` object, `ConfigureAwait()` must be present
-- Intergrats with CI pipelines - Uses a non-zero exit code when new invalid `await` is found, allowing you to cause the build to fail
+- Run on existing codebases - `await`s without `ConfigureAwait()` will get a free pass on the first run on the tool. Only new/modified code will flag an error, allowing you to add this now and fix existing code later
+- Supports `dynamic` - Enforces that when `await` is called on something `dynamic`, `ConfigureAwait()` must still be present
+- Integrates with CI pipelines - Uses a non-zero exit code when new invalid `await` is found, allowing you to fail the build
 
 ```
 > Slicedbread.ConfigureAwaitEnforcer.exe   MySolution.sln
@@ -26,8 +26,6 @@ Found 3 new await call(s) without ConfigureAwait
   
   MyProject - AnotherFile
     12: await DoSomethingAsync();
-
-
 ```
 
 # Parameters
@@ -44,12 +42,17 @@ Useful if you wish to find all existing invalid `await`s in your codebase locall
 
 #### Ignoring Files
 ```
-> Slicedbread.ConfigureAwaitEnforcer.exe  MySolution.sln  /excludeFiles "tests" 
-```
-
-Ignores any file whos name contains the string passed to `excludeFiles`. 
-
-You can specify this multiple times, for example:
-```
 > Slicedbread.ConfigureAwaitEnforcer.exe  MySolution.sln  /excludeFiles "tests"  /excludeFiles "fixture" 
 ```
+
+Ignores any file with a name containing the string passed to `/excludeFiles`. 
+
+You can specify this multiple times.
+
+
+# How does it work?
+This code uses The .NET Compiler Platform (a.k.a. Roslyn).
+
+Most of the repository is boilerplate code for writing to the console etc. The interesting code for parsing a document to find `await`s without `ConfigureAwait()` is in [DocumentAnalyser.cs](https://github.com/sliced-bread/Slicedbread.ConfigureAwaitEnforcer/blob/master/src/ConfigureAwaitEnforcer/Analyser/DocumentAnalyser.cs#L12)
+
+The tests for this code (useful for checking what syntax the tool does/does not support) are [here](https://github.com/sliced-bread/Slicedbread.ConfigureAwaitEnforcer/blob/master/src/Tests/Tests.cs)
