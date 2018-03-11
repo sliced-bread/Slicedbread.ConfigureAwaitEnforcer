@@ -24,7 +24,7 @@ Found 3 new await call(s) without ConfigureAwait
     54: await DoSomethingAsync();
     70: var a = DoSomethingElseAsync();
   
-  MyProject - AnotherFile
+  MyProject - AnotherFile.cs
     12: await DoSomethingAsync();
 ```
 
