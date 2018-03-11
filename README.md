@@ -54,6 +54,6 @@ You can specify this multiple times.
 # How does it work?
 This tool uses The .NET Compiler Platform (a.k.a. Roslyn).
 
-Most of the repository is boilerplate for writing to the console etc. The interesting code for parsing a document to find `await`s without `ConfigureAwait()` is in [DocumentAnalyser.cs](https://github.com/sliced-bread/Slicedbread.ConfigureAwaitEnforcer/blob/master/src/ConfigureAwaitEnforcer/Analyser/DocumentAnalyser.cs#L12)
+Most of the repository is boilerplate for writing to the console etc. The interesting code, for parsing a document to find `await`s without `ConfigureAwait()`, is in [DocumentAnalyser.cs](https://github.com/sliced-bread/Slicedbread.ConfigureAwaitEnforcer/blob/master/src/ConfigureAwaitEnforcer/Analyser/DocumentAnalyser.cs#L12)
 
 The tests for this code (useful for checking what syntax the tool does/does not support) are [here](https://github.com/sliced-bread/Slicedbread.ConfigureAwaitEnforcer/blob/master/src/Tests/Tests.cs)
