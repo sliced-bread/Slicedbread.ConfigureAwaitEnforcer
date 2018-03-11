@@ -246,7 +246,7 @@
         }
 
 
-        private IEnumerable<InvalidCall> InvalidAwaitsForStatement(string code)
+        private IEnumerable<InvalidAwait> InvalidAwaitsForStatement(string code)
         {
             // Wrap the statement in a class, namespace etc.
             var wrappedCode = @"
@@ -268,7 +268,7 @@
             return GetInvalidAwaitsForCode(wrappedCode);
         }
 
-        private IEnumerable<InvalidCall> GetInvalidAwaitsForCode(string code)
+        private IEnumerable<InvalidAwait> GetInvalidAwaitsForCode(string code)
         {
             var doc = _solution.Projects.First().AddDocument(ExampleClassName, SourceText.From(code));
 

@@ -8,7 +8,7 @@ namespace ConfigureAwaitEnforcer.History
 
     public class History
     {
-        public List<InvalidCall> OnlyNewCallsForSolution(string solutionPath, List<InvalidCall> invalidAwaits)
+        public List<InvalidAwait> OnlyNewCallsForSolution(string solutionPath, List<InvalidAwait> invalidAwaits)
         {
             // If this is the first run, ignore all of these
             var dataFolder = $"{AppContext.BaseDirectory}\\data\\";
@@ -18,7 +18,7 @@ namespace ConfigureAwaitEnforcer.History
             {
                 ConsoleWriter.WriteLine("This is the first run, ignoring all invalid awaits", ConsoleColor.Yellow);
 
-                var history = invalidAwaits.Select(i => new HistoricalInvalidCall(i.ProjectName, i.FileName, i.LineNumber));
+                var history = invalidAwaits.Select(i => new HistoricalInvalidAwait(i.ProjectName, i.FileName, i.LineNumber));
 
                 if (!Directory.Exists(dataFolder))
                     Directory.CreateDirectory(dataFolder);
@@ -29,9 +29,9 @@ namespace ConfigureAwaitEnforcer.History
             else
             {
                 var historyText = File.ReadAllText(solutionHistoryFile);
-                var history = JsonConvert.DeserializeObject<IList<HistoricalInvalidCall>>(historyText);
+                var history = JsonConvert.DeserializeObject<IList<HistoricalInvalidAwait>>(historyText);
 
-                invalidAwaits = invalidAwaits.Where(i =>
+                invalidAwaits = invalidAwaits.Where(i => 
                         !history.Any(h => h.ProjectName == i.ProjectName && 
                                           h.FileName == i.FileName &&
                                           h.LineNumber == i.LineNumber)

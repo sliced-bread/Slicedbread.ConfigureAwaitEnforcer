@@ -1,13 +1,13 @@
 ﻿namespace ConfigureAwaitEnforcer
 {
-    public class InvalidCall
+    public class InvalidAwait
     {
         public string ProjectName { get; }
         public string FileName { get; }
         public string LineText { get; }
         public int LineNumber { get; }
 
-        public InvalidCall(string projectname, string fileName, string lineText, int lineNumber)
+        public InvalidAwait(string projectname, string fileName, string lineText, int lineNumber)
         {
             ProjectName = projectname;
             FileName = fileName;

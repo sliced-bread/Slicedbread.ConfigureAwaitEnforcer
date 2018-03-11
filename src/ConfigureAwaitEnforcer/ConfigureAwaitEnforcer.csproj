@@ -193,11 +193,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyser\DocumentAnalyser.cs" />
-    <Compile Include="History\HistoricalInvalidCall.cs" />
+    <Compile Include="History\HistoricalInvalidAwait.cs" />
     <Compile Include="History\History.cs" />
     <Compile Include="ConsoleWriter.cs" />
     <Compile Include="Analyser\SolutionAnalyser.cs" />
-    <Compile Include="InvalidCall.cs" />
+    <Compile Include="InvalidAwait.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

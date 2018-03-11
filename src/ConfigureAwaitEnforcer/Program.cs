@@ -68,7 +68,7 @@
             return excludeFileList;
         }
 
-        private static void WriteInvalidAsyncCallsToOutput(List<InvalidCall> invalidCalls)
+        private static void WriteInvalidAsyncCallsToOutput(List<InvalidAwait> invalidCalls)
         {
             var groupedByProject = invalidCalls.GroupBy(c => c.ProjectName);
             foreach (var project in groupedByProject)

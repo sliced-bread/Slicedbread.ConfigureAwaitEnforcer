@@ -11,14 +11,14 @@
     {
         private static readonly DocumentAnalyser DocumentAnalyser = new DocumentAnalyser();
 
-        public async Task<List<InvalidCall>> GetInvalidAwaitsForSolution(string solutionPath, IEnumerable<string> excludeFilesContaining)
+        public async Task<List<InvalidAwait>> GetInvalidAwaitsForSolution(string solutionPath, IEnumerable<string> excludeFilesContaining)
         {
             ConsoleWriter.WriteLine($"Loading solution {solutionPath}");
             ConsoleWriter.WriteLine();
             var solution = await GetSolutionByPathAsync(solutionPath);
 
             ConsoleWriter.WriteLine("Analysing:");
-            var invalidAwaits = new List<InvalidCall>();
+            var invalidAwaits = new List<InvalidAwait>();
             foreach (var project in solution.Projects)
             {
                 var docsToParse = project

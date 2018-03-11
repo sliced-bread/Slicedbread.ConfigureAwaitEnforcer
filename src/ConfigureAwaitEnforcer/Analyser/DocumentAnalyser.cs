@@ -9,18 +9,18 @@
 
     public class DocumentAnalyser
     {
-        public async Task<IEnumerable<InvalidCall>> GetInvalidAwaitCallsAsync(Document document)
+        public async Task<IEnumerable<InvalidAwait>> GetInvalidAwaitCallsAsync(Document document)
         {
             var syntaxTree = await document.GetSyntaxRootAsync();
 
             var awaits = syntaxTree.DescendantNodes().OfType<AwaitExpressionSyntax>().ToList();
             if (!awaits.Any())
-                return new List<InvalidCall>();
+                return new List<InvalidAwait>();
 
             var model = await document.GetSemanticModelAsync();
             var text = await document.GetTextAsync();
 
-            var list = new List<InvalidCall>();
+            var list = new List<InvalidAwait>();
             foreach (var awaitExpression in awaits)
             {
                 var typeName = model.GetTypeInfo(awaitExpression.Expression).Type.Name;
@@ -44,16 +44,16 @@
 
                 // Have we flagged this line already in this run? Some lines may trigger twice
                 // (e.g. 'await Task.Run(async () => await MethodAsync());');
-                if (list.Any(x =>
+                var itemAlreadyInList = list.Any(x =>
                     x.ProjectName == document.Project.Name &&
                     x.FileName == document.Name &&
                     x.LineNumber == line.LineNumber + 1
-                ))
-                {
-                    continue;
-                }
+                );
 
-                list.Add(new InvalidCall(
+                if (itemAlreadyInList)
+                    continue;
+
+                list.Add(new InvalidAwait(
                     document.Project.Name,
                     document.Name,
                     line.ToString().Trim(),
