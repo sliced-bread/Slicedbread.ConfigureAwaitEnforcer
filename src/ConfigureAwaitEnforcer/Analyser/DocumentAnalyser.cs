@@ -44,8 +44,14 @@
 
                 // Have we flagged this line already in this run? Some lines may trigger twice
                 // (e.g. 'await Task.Run(async () => await MethodAsync());');
-                if (list.Any(x => x.LineNumber == line.LineNumber + 1))
+                if (list.Any(x =>
+                    x.ProjectName == document.Project.Name &&
+                    x.FileName == document.Name &&
+                    x.LineNumber == line.LineNumber + 1
+                ))
+                {
                     continue;
+                }
 
                 list.Add(new InvalidCall(
                     document.Project.Name,
