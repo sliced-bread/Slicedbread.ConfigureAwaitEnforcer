@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.MSBuild;
+    using Microsoft.Build.Locator;
 
     public class SolutionAnalyser
     {
@@ -38,6 +39,10 @@
 
         private static Task<Solution> GetSolutionByPathAsync(string solutionPath)
         {
+            ConsoleWriter.WriteLine("Locating MSBuild");
+            MSBuildLocator.RegisterDefaults();
+
+            ConsoleWriter.WriteLine("MSBuild registered, creating Workspace");
             var msWorkspace = MSBuildWorkspace.Create();
             msWorkspace.WorkspaceFailed += (s, e) => ConsoleWriter.WriteLine(e.Diagnostic.Message, ConsoleColor.Red);
 

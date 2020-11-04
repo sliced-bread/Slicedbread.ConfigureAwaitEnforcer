@@ -78,7 +78,7 @@
             invalidAwait.LineNumber.ShouldBe(10);
             invalidAwait.LineText.ShouldBe("await MethodAsync();");
         }
-        
+
         [Fact]
         public void Does_Not_Report_Call_That_Blocks_With_Wait()
         {
@@ -156,7 +156,7 @@
                       );")
                 .Count().ShouldBe(2);
         }
-        
+
         [Fact]
         public void Does_Not_Flag_Await_On_Dynamic_With_ConfigureAwait()
         {
@@ -175,7 +175,7 @@
                         private dynamic MethodAsync() => Task.CompletedTask;
                     }
                 }");
-                
+
             invalidAwait.ShouldBeEmpty();
         }
 
